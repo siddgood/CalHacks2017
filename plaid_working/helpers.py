@@ -11,7 +11,7 @@ def transactions(access_token, client):
     end_date = '2017-09-20'
 
     response = client.Transactions.get(access_token, start_date=start_date, end_date=end_date)
-    return response['transactions']
+    return response['transactions'][0]
 
 def accounts(access_token, client):
     accounts = client.Auth.get(access_token)

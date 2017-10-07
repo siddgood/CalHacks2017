@@ -33,6 +33,7 @@ def get_access_token():
   global access_token
   exchange_response = client.Item.public_token.exchange(request.form['public_token'])
   access_token, item_id = exchange_response['access_token'], exchange_response['item_id']
+
   transacts = transactions(access_token, client)
 
   return jsonify(exchange_response)
