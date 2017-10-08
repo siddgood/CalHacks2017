@@ -66,7 +66,7 @@ def sms():
             callers[from_number]['stats']['bmr'] -= food['total']
             message = "\n" + food["name"].replace("+", " ") + ":\nTotal Calories: " + str(food['total']) + "\nCals Left for Today: " + str(callers[from_number]['stats']['bmr'])
     else:
-        message = ("\nHi! I'm FoodBot! What's your name?")
+        message = ("\nHi! I'm ChefText! What's your name?")
         callers.update({
             from_number: {
                 'name': "",
