@@ -15,7 +15,7 @@ def sms():
 
     if from_number in callers and callers[from_number]['name_set'] == 0:
         callers[from_number]['name'] = request.values.get('Body', None)
-        message = "\nEnter your age, height, weight, and gender separated by spaces."
+        message = "\nHi " + callers[from_number]['name'] + "Enter your age, height, weight, and gender separated by spaces."
         resp = MessagingResponse()
         resp.message(message)
         callers[from_number]['name_set'] = 1
@@ -33,7 +33,7 @@ def sms():
         else:
             callers[from_number]['stats']['bmr'] = (655 + (4.35 * float(weight)) + (4.7 * float(height)) - (4.7 * float(age)))
 
-        message = "\nUSAGE:\nTo find out how many calories a food is, enter <food>?.\nTo log a meal, enter <food>"
+        message = "\nUSAGE:\nTo find out how many calories a food is, enter <food>?.\nTo log a meal, enter <food>."
         resp = MessagingResponse()
         resp.message(message)
         callers[from_number]['setup'] = 1
@@ -64,7 +64,7 @@ def sms():
             message = "\n" + food["name"].replace("+", " ") + ":\nTotal Calories: " + str(food['total']) + "\nFat (g): " + str(food['fat'])+ "\nCarbs (g): " + str(food['carbs'])+ "\nProtein (g): " + str(food['protein'])
         else:
             callers[from_number]['stats']['bmr'] -= food['total']
-            message = "\n" + food["name"].replace("+", " ") + ":\nTotal Calories: " + str(food['total']) + "\nCals Left (g): " + str(callers[from_number]['stats']['bmr'])
+            message = "\n" + food["name"].replace("+", " ") + ":\nTotal Calories: " + str(food['total']) + "\nCals Left for Today: " + str(callers[from_number]['stats']['bmr'])
     else:
         message = ("\nHi! I'm FoodBot! What's your name?")
         callers.update({
@@ -85,7 +85,6 @@ def sms():
 
     resp = MessagingResponse()
     resp.message(message)
-
     return str(resp)
 
 if __name__ == "__main__":
